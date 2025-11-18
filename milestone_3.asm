@@ -256,9 +256,9 @@ respond_to_S:
 
     ###
 
-    addi $t6, $t0, 2080 #bottom right grid position($a2)
+    addi $t6, $t0, 2080 #bottom right grid position
     li $t7, 8               # 7 columns to check
-    li $t8, 0               # Flag: 0 = can move, 1 = at border
+    li $t8, 0               # Flag: 0 = can move, 1 = at border, 2 = another column
     check_bottom_border:
         beq $t7, $zero, check_bottom_done   # Checks if we've looped through all 7 row pixels
         addi $t9, $t9, 384                  # bottom pixel value
@@ -268,33 +268,46 @@ respond_to_S:
         addi $t7, $t7, -1                   # Decrement $t7 for loop
         j check_bottom_border
         
-    at_bottom_border:
-        li, $t8, 1          # If pixel is at a border, modify our $t8 flag
+      at_bottom_border:
+          li, $t8, 1          # If pixel is at a border, modify our $t8 flag
+      check_bottom_done:
+          beq $t8, 1, reset           # Check if flag equals to 1, if so redraw pixels in the same spot through dont_move function and create new columns
+          
+          
+          j check_column_collision
+          
+          
+    check_column_collision:
+      # workflow: check if $t0 at $t9 + 128 is coloured - if it is stop moving
+      add $t9, $t9, 384 # the pixel after the column ($t9+384+128 = 512)
+      lw $t6, 0($t9) # load the colour of the pixel into $t6
+      subi $t9, $t9, 384 #resets $t9 value
+      bne $t6, 0x000000, at_another_column #checks that our current column collides with another column
+      # No collision - move down normally
+      # Otherwise, move $t3 $t4, $t5 one pixel to the left (i.e substract)
+      # Set current pixels to be black
+      li $v0, 0x0000
+          sw $v0, 0($t9) # colour the top line black
+          addi $t9, $t9, 128
+      j draw_initial_blocks
+      
+    at_another_column:
+      li, $t8, 1 # set collision flag
+      j reset # Reset and create new column on top
+      
         
-        
-    check_bottom_done:
-        bne $t8, $zero, reset           # Check if flag equals to 1, if so redraw pixels in the same spot through dont_move function and create new columns
-        
-        # Otherwise, move $t3 $t4, $t5 one pixel to the left (i.e substract)
-        # Set current pixels to be black
-        li $v0, 0x0000
-        sw $v0, 0($t9) # colour the top line black
-        addi $t9, $t9, 128
-        j draw_initial_blocks
-
-    ###
     
-reset:
-  jal rand_colour           # generate random colour
-    move $t3, $v0           # store random colour in $t2
-    
-    jal rand_colour
-    move $t4, $v0           # store random colour in $t3
-    
-    jal rand_colour
-    move $t5, $v0           # store random colour in $t4
-  addi $t9, $t0, 144      # $t9 stores the middle of top line of the grid (reset to original value)
-  j draw_initial_blocks
+  reset:
+    jal rand_colour           # generate random colour
+      move $t3, $v0           # store random colour in $t2
+      
+      jal rand_colour
+      move $t4, $v0           # store random colour in $t3
+      
+      jal rand_colour
+      move $t5, $v0           # store random colour in $t4
+    addi $t9, $t0, 144      # $t9 stores the middle of top line of the grid (reset to original value)
+    j draw_initial_blocks
     
   
   
