@@ -1,0 +1,104 @@
+\documentclass{article}
+
+%% Page Margins %%
+\usepackage{geometry}
+\geometry{
+    top = 0.75in,
+    bottom = 0.75in,
+    right = 0.75in,
+    left = 0.75in,
+}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\title{Assembly Project: Dr Mario}
+
+% TODO: Enter your name
+\author{Elena Ding & Name 2}
+
+\begin{document}
+\maketitle
+
+\section{Instruction and Summary}
+
+\begin{enumerate}
+
+    \item Which milestones were implemented? 
+    Milestone 1, 2, 3
+
+    \item How to view the game:
+    % TODO: specify the pixes/unit, width and height of 
+    %       your game, etc.  NOTE: list these details in
+    %       the header of your breakout.asm file too!
+    
+    \begin{enumerate}
+
+    \item Unit width/height in pixels: 8
+    \item Display width/height in pixels: 256
+    \item Base address for display: 0x10008000
+
+
+    \end{enumerate}
+
+    
+
+\begin{figure}[ht!]
+    \centering
+    % \includegraphics[width=0.3\textwidth]{name.png}
+    \caption{caption}
+    \label{Instructions}
+\end{figure}
+
+\item Game Summary:
+% TODO: Tell us a little about your game.
+\begin{itemize}
+\item Columns is like simplified tetris
+\item 3 randomly coloured pixels are stacked on top of each other to form a rectangle which you can control with WASD, where ASD moves the rectangle and W shuffles the colours of the rectangle
+\item Grid is 13 x 7
+\item Match 3 colours in a row, column, or diagonal to clear those blocks and make space for new rectangles
+\item Game is over when the rectangle hits the top and can't move downward.
+\end{itemize}
+
+    
+\end{enumerate}
+
+\section{Attribution Table}
+% TODO: If you worked in partners, tell us who was 
+%       responsible for which features. Some reweighting 
+%       might be possible in cases where one group member
+%       deserves extra credit for the work they put in.
+
+\begin{center}
+\begin{tabular}{|| c | c ||}
+\hline
+ Student 1 (Elena Ding (1011012841)) &  Student 2 (Name and student number) \\ 
+ \hline
+ Draw the first 3 gem column with random colours & Task\\
+ \hline
+ Implement shuffle logic with key W & Task\\
+ \hline
+ Allow player to quit game with key q & Task\\ 
+ \hline
+ When column moves into left or right side wall, keep it in same location & Task\\ 
+ \hline
+ When player tries to move a column left/right but another column is there, keep it in the same location & Task\\
+ \hline
+ End game if gems reach the top of the grid & Task\\
+ \hline
+ Task & Task\\  
+ \hline
+\end{tabular}
+\end{center}
+
+% TODO: Fill out the remainder of the document as you see 
+%       fit, including as much detail as you think 
+%       necessary to better understand your code. 
+%       You can add extra sections and subsections to 
+%       help us understand why you deserve marks for 
+%       features that were more challenging than they
+%       might initially seem.
+
+
+\end{document}
