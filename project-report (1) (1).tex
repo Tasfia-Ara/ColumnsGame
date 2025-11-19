@@ -1,0 +1,104 @@
+\documentclass{article}
+
+%% Page Margins %%
+\usepackage{geometry}
+\geometry{
+    top = 0.75in,
+    bottom = 0.75in,
+    right = 0.75in,
+    left = 0.75in,
+}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\title{Assembly Project: Columns, a Tetris-Like Game}
+
+% TODO: Enter your name
+\author{Elena Ding & Tasfia (Ira) Ara}
+
+\begin{document}
+\maketitle
+
+\section{Instruction and Summary}
+
+\begin{enumerate}
+
+    \item Which milestones were implemented? 
+    Milestone 1, 2, 3
+
+    \item How to view the game:
+    INSTRUCTIONS: specify the pixels/unit, width and height of 
+          your game, etc.  NOTE: list these details in
+          the header of your breakout.asm file too!
+    \begin{enumerate}
+    \item Unit width/height in pixels: 8
+    \item Display width/height in pixels: 256
+    \item Base address for display: 0x10008000
+    \end{enumerate}
+
+    
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{968e6260-e81e-4ab2-b972-71d73dd36525.jpeg}
+    \caption{Grid Diagram - Mapping Out the Layout}
+    \label{Instructions}
+\end{figure}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Screenshot 2025-11-19 at 4.47.27 PM.png}
+    \caption{Memory Address}
+    \label{Instructions}
+\end{figure}
+
+\item Game Summary:
+INSTRUCTIONS: Tell us a little about your game.
+\begin{itemize}
+\item Columns is like simplified tetris
+\item 3 randomly coloured pixels are stacked on top of each other to form a rectangle which you can control with WASD, where ASD moves the rectangle and W shuffles the colours of the rectangle
+\item Grid is 13 x 7
+\item Match 3 colours in a row, column, or diagonal to clear those blocks and make space for new rectangles
+\item Game is over when the rectangle hits the top and can't move downward.
+\end{itemize}
+
+    
+\end{enumerate}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Screenshot 2025-11-19 at 4.49.16 PM.png}
+    \caption{Milestone 1: Static Grid + First Generated Column}
+    \label{Instructions}
+\end{figure}
+
+\section{Attribution Table}
+INSTRUCTIONS: If you worked in partners, tell us who was 
+              responsible for which features. Some reweighting 
+              might be possible in cases where one group member
+              deserves extra credit for the work they put in.
+
+\begin{center}
+\small % Reduce font size slightly
+\begin{tabular}{|| p{0.45\textwidth} | p{0.45\textwidth} ||}
+\hline
+\textbf{Student 1 (Elena Ding, 1011012841)} & \textbf{Student 2 (Tasfia (Ira) Ara, 1009854686)}\\ 
+\hline
+Draw the first 3 gem column with random colours & Draw the grid (17*7 pixels) (milestone 1)\\
+\hline
+Implement shuffle logic with key W & Implement move left logic with key A (milestone 2)\\
+\hline
+Allow player to quit game with key q & Implement move right logic with key D (milestone 2)\\ 
+\hline
+When column moves into left or right side wall, keep it in same location & Implement move down (drop) one line key S (milestone 2)\\ 
+\hline
+When player tries to move a column left/right but another column is there, keep it in the same location & Implement collision detection to the bottom border (freezes current column when it hits the bottom border, generates a new column to manipulate) (milestone 3)\\
+\hline
+End game if gems reach the top of the grid & Implement collision detection with another column (freezes current column when it hits another column, generate a new column to manipulate) (milestone 3)\\
+\hline
+-- & Detect three adjacent gems of the same colour (row, column or diagonal). If the same gem colours are detected, they are automatically removed, and other pixels in the same row and column are dropped to the lowest level (either to the border or until it hits another column). If more matches are detected after this drop along the row, column or diagonal, the pixel removal and drop process repeats until no other matches are found. Then a new column is generated for the user to manipulate. (milestone 3)\\  
+\hline
+\end{tabular}
+\end{center}
+\end{document}
